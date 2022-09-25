@@ -32,37 +32,31 @@ Once you are running a Docker container, you should see the following directorie
 
 - XXX
 
+### Results Format
+
+XXX
+
 ## "Kick the Tires" Phase Instructions
 
 These instructions will run a small set of experiments; they took about XXX minutes to complete on our laptop.
 If they complete successfully, that hopefully means that you will not encounter bugs when running the full evaluation phase.
 The number of trials, benchmarks, timeout, etc. can be modified by changing the variables in the appropriate script.
 
+**Say how they can check if the results make sense.**
+
 ### Evaluating Sections 7.1-7.4
 
-This command will run all the tools (five trials per tool) on two quick-running benchmarks (`path` and `traffic`) from the evaluation in Sections 7.1-7.4 of the paper:
+This command will run all the tools (three trials per tool) on two quick-running benchmarks (`path` and `traffic`) from the evaluation in Sections 7.1-7.4 of the paper:
 
 ```
-XXX
+~/scripts/kick_the_tires_sections_7_1_to_7_4.sh
 ```
 
-It takes about XXX minutes on our laptop.
+It takes about 15 seconds on our laptop.
 
-Once it is complete, results will be put in the directory `section_7_1_to_7_4_results/`.
-
-**How will they know that results are correct?**
+Once it is complete, results will be put in the directory `section_7_1_to_7_4_results/kick_the_tires/`.
 
 ### Evaluating Section 7.5 (Regular Benchmarks)
-
-This command will run all the tools (5 trials per tool) on two quick-running benchmarks (`path` and `traffic`) from the regular benchmark evaluation in Section 7.5 of the paper:
-
-```
-XXX
-```
-
-It takes about XXX minutes on our laptop.
-
-Once it is complete, results will be put in the directory `section_7_5_regular_results/`.
 
 ### Evaluating Section 7.5 (Scaling Evaluation)
 
@@ -82,7 +76,17 @@ XXX
 
 ### Evaluating Sections 7.1-7.4
 
-XXX
+This command will run all the tools on all the benchmarks from the evaluation in Sections 7.1-7.4 of the paper:
+
+```
+~/scripts/evaluation_sections_7_1_to_7_4.sh
+```
+
+By default, it performs 10 trials per tool/benchmark pair and uses a timeout of 10 minutes per trial (the settings we used in the paper evaluation).
+However, this takes quite a while to run, and you can change these setting in the script itself.
+Performing three trials per tool/benchmark pair and using a timeout of 3 minutes, it takes about XXX minutes on our laptop.
+
+Once it is complete, results will be put in the directory `section_7_1_to_7_4_results/evaluation/`.
 
 ### Evaluating Section 7.5 (Regular Benchmarks)
 
@@ -107,6 +111,8 @@ None so far.
 
 ## TODO
 
-- Write scripts for each of the experiments
+- Write scripts for section 7.5 experiments
 - Clean up scripts directory
+- Instructions on how to view PDFs
+- Come up with better format for tables
 - Test scripts
