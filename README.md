@@ -9,19 +9,20 @@ This document is divided into the following sections:
 - "Evaluation" phase instructions
 - Updates
 
-We'll use the final section as necessary during the evaluation process to report any bug fixes or new instructions.
+We'll push updates to the final section as necessary during the evaluation process to report any bug fixes or new instructions.
+Accordingly, if you are reading a local copy of this document, please also check the [GitHub repository](https://github.com/HarvardPL/datalog-synth-smt-asp-artifact) for any updates.
 
 ## Setup 
 
-Our artifact is installed on a Docker image, available publicly [here](XXX).
+Our artifact can be found on a Docker image, publicly available on [Docker Hub](https://hub.docker.com/r/aaronbembenek/XXX).
 Assuming that you have Docker installed, to download the image and run an interactive session you can simply use the command
 
 ```
-XXX
+docker run -it aaronbembenek/XXX:0.1.0 # may require sudo
 ```
 
 We ran the experiments reported in the paper directly (i.e., without Docker) on a powerful AWS EC2 (32 vCPUs and 128 GB RAM).
-However, many of the results should be reproducible on a personal laptop.
+However, many of the results should be reproducible using Docker on a personal laptop.
 You want to make sure that Docker is provisioned with enough CPUs and RAM (in our personal setup, Docker has access to 4 vCPUs and 16 GB RAM).
 If you are using Docker Desktop on OS X, you can set this via Preferences > Resources > Advanced.
 
