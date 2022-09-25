@@ -89,10 +89,10 @@ XXX
 XXX
 
 The scripts invoked here do not report the ProSynth compilation time.
-To get a sense for this (for, say, the `scc` benchmark), you can run this command:
+To get a sense for this (for, say, the `path` benchmark), you can run this command:
 
 ```
-rm -rf ~/benchmarks/build/regular/scc && time cmake --build ~/benchmarks/build --target scc 
+export BENCH=path && rm -rf ~/benchmarks/build/regular/$BENCH && time cmake --build ~/benchmarks/build --target $BENCH 
 ```
 
 This command compiles the benchmark twice (once for ProSynth and once for MonoSynth), and so the ProSynth compilation time will be approximately half of the reported time.
