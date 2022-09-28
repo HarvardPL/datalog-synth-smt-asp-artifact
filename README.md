@@ -30,7 +30,16 @@ If you are using Docker Desktop on OS X, you can set this via Preferences > Reso
 
 Once you are running a Docker container, you should see the following directories:
 
-- XXX
+- `benchmarks`
+- `bin`: links to the prosynth-X, monosynth-X, loopsynth-X, and aspsynth-X tools
+- `build_data`: miscellaneous data used to set up the image
+- `datalog-smmt-cvc4-impl`: our implementation of Datalog-as-a-monotonic-theory, built on top of CVC4. Most of our changes are in `~/datalog-smmt-cvc4-impl/CVC4-1.8/src/theory/datalog`. 
+- `datalog-smmt-z3-impl`: 
+- `gensynth`
+- `scripts`
+- `section_7_5_regular_results`
+- `section_7_5_scale_results`
+- `sections_7_1_to_7_4_results`
 
 ### Results Format
 
@@ -38,7 +47,7 @@ XXX
 
 ## "Kick the Tires" Phase Instructions
 
-These instructions will run a small set of experiments; they took about XXX minutes to complete on our laptop.
+These instructions will run all the experiments from Section 7 of the paper, but with fewer trials (2 vs 10) and a shorter timeout (10 seconds vs 10 minutes).
 If they complete successfully, that hopefully means that you will not encounter bugs when running the full evaluation phase.
 The number of trials, benchmarks, timeout, etc. can be modified by changing the variables in the appropriate script.
 
@@ -46,29 +55,50 @@ The number of trials, benchmarks, timeout, etc. can be modified by changing the 
 
 ### Evaluating Sections 7.1-7.4
 
-This command will run all the tools (three trials per tool) on two quick-running benchmarks (`path` and `traffic`) from the evaluation in Sections 7.1-7.4 of the paper:
+This command will run the experiments in Sections 7.1-7.4:
 
 ```
 ~/scripts/kick_the_tires_sections_7_1_to_7_4.sh
 ```
 
-It takes about 15 seconds on our laptop.
+It takes about XXX seconds on our laptop.
 
-Once it is complete, results will be put in the directory `section_7_1_to_7_4_results/kick_the_tires/`.
+Once it is complete, results will be put in the directory `~/sections_7_1_to_7_4_results/kick_the_tires/`.
 
 ### Evaluating Section 7.5 (Regular Benchmarks)
 
+This command will run the regular (non-scaling) experiments in Section 7.5:
+
+```
+~/scripts/kick_the_tires_section_7_5_regular.sh
+```
+
+It takes about 16 minutes on our laptop.
+
+Once it is complete, results will be put in the directory `~/section_7_5_regular_results/kick_the_tires/`.
+It should contain the following files:
+
+- XXX 
+It should contain the following files:
+
+- XXX 
+
 ### Evaluating Section 7.5 (Scaling Evaluation)
 
-This command will run all the tools (5 trials per tool) on two benchmarks (`path` and `traffic`) from the scaling evaluation in Section 7.5 of the paper:
+This command will run all the scaling experiments in Section 7.5:
 
 ```
-XXX
+~/scripts/kick_the_tires_section_7_5_scale.sh
 ```
 
-It takes about XXX minutes on our laptop.
+It takes about 10 minutes on our laptop.
 
-Once it is complete, results will be put in the directory `section_7_5_scaling_results/`.
+Once it is complete, results will be put in the directory `~/section_7_5_scale_results/kick_the_tires`.
+It should contain the following files:
+
+- `kick_the_tires.csv`: the aggregated data
+- `times.tsv`: a performance table (times in seconds)
+- `figure_10b`: Figure 10b from the paper (using the new data, of course)
 
 ## "Evaluation" Phase Instructions
 
@@ -76,30 +106,20 @@ XXX
 
 ### Evaluating Sections 7.1-7.4
 
-This command will run all the tools on all the benchmarks from the evaluation in Sections 7.1-7.4 of the paper:
-
-```
-~/scripts/evaluation_sections_7_1_to_7_4.sh
-```
-
-By default, it performs 10 trials per tool/benchmark pair and uses a timeout of 10 minutes per trial (the settings we used in the paper evaluation).
-However, this takes quite a while to run, and you can change these setting in the script itself.
-Performing three trials per tool/benchmark pair and using a timeout of 3 minutes, it takes about XXX minutes on our laptop.
-
-Once it is complete, results will be put in the directory `section_7_1_to_7_4_results/evaluation/`.
+XXX
 
 ### Evaluating Section 7.5 (Regular Benchmarks)
 
 XXX
 
-The scripts invoked here do not report the ProSynth compilation time.
-To get a sense for this (for, say, the `path` benchmark), you can run this command:
+The scripts invoked here do not recompile the benchmarks to record ProSynth compilation time; instead, they reuse compilation time results from the experiments reported in the paper (the data is in `~/section_7_5_regular_results/data/prosynth-z3/compilation_times/`).
+To get a sense for the compilation times yourself (for, say, the `path` benchmark), you can run this command:
 
 ```
 export BENCH=path && rm -rf ~/benchmarks/build/regular/$BENCH && time cmake --build ~/benchmarks/build --target $BENCH 
 ```
 
-This command compiles the benchmark twice (once for ProSynth and once for MonoSynth), and so the ProSynth compilation time will be approximately half of the reported time.
+This command compiles the benchmark's Souffle code twice (once for ProSynth and once for MonoSynth), and so the ProSynth compilation time will be approximately half of the reported time.
 
 ### Evaluating Section 7.5 (Scaling Evaluation)
 
@@ -111,8 +131,14 @@ None so far.
 
 ## TODO
 
-- Write scripts for section 7.5 experiments
+- [ ] Write scripts for section 7.5 experiments
+    - [X] Add script for evaluating 7.5 scale
+    - [X] Update data processing scripts for 7.5 scale experiments
+    - [ ] Update data processing scripts for 7.5 regular experiments
+    - [ ] Update data processing scripts for 7.1-7.4 experiments
 - Clean up scripts directory
+- Remove unused directories
 - Instructions on how to view PDFs
-- Come up with better format for tables
+- Come up with better format for tables (maybe just output a TSV)
 - Test scripts
+- Clean up CVC4 source
