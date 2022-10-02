@@ -17,7 +17,7 @@ Accordingly, if you are reading a local copy of this document, please also check
 Our artifact can be found on a Docker image, publicly available on [Docker Hub](https://hub.docker.com/r/aaronbembenek/datalog-synth-smt-asp-artifact).
 Assuming that you have Docker installed, to download the image and run an interactive session you can simply use this command:
 
-```
+```bash
 docker run --name datalog-synth-smt-asp-artifact -it aaronbembenek/datalog-synth-smt-asp-artifact:0.1.0 # may require sudo
 ```
 
@@ -58,7 +58,7 @@ Results will be in the following format:
 
 To view the `.pdf` files (and to open the `.csv` or `.tsv` files in a spreadsheet viewer), you will have to copy them from the Docker container to the host machine (e.g., your laptop) using the `docker cp` command:
 
-```
+```bash
 docker cp datalog-synth-smt-asp-artifact:/root/sections_7_1_to_7_4_results/kick_the_tires/figure_9.pdf . # may require sudo
 ```
 
@@ -68,25 +68,32 @@ These instructions will run all the experiments from Section 7 of the paper, but
 If they complete successfully, that hopefully means that you will not encounter bugs when running the full evaluation phase.
 The number of trials, benchmarks, timeout, etc. can be modified by changing the variables in the appropriate script.
 
-**Say how they can check if the results make sense.**
+**Please ensure that the experiments are generating the plots and tables correctly.**
+They should generally look like the results reported in the paper, modulo the much shorter timeouts.
 
 ### Evaluating Sections 7.1-7.4
 
 This command will run the experiments in Sections 7.1-7.4:
 
-```
+```bash
 ~/scripts/kick_the_tires_sections_7_1_to_7_4.sh
 ```
 
-It takes about XXX seconds on our laptop.
+It takes about 27 minutes on our laptop.
 
 Once it is complete, results will be put in the directory `~/sections_7_1_to_7_4_results/kick_the_tires/`.
+It should contain the following files:
+
+- `figure_9.pdf` (boxplot)
+- `kick_the_tires.csv` (assembled data)
+- `table_2.tsv` (average time, in seconds)
+- `table_3.tsv` (number of conflicts)
 
 ### Evaluating Section 7.5 (Regular Benchmarks)
 
 This command will run the regular (non-scaling) experiments in Section 7.5:
 
-```
+```bash
 ~/scripts/kick_the_tires_section_7_5_regular.sh
 ```
 
@@ -95,16 +102,16 @@ It takes about 16 minutes on our laptop.
 Once it is complete, results will be put in the directory `~/section_7_5_regular_results/kick_the_tires/`.
 It should contain the following files:
 
-- XXX 
-It should contain the following files:
-
-- XXX 
+- `figure_10a.pdf` (boxplot)
+- `kick_the_tires.csv` (assembled data)
+- `program_sizes.pdf` (boxplot of synthesized solution size)
+- `times.tsv` (average time, in seconds)
 
 ### Evaluating Section 7.5 (Scaling Evaluation)
 
 This command will run all the scaling experiments in Section 7.5:
 
-```
+```bash
 ~/scripts/kick_the_tires_section_7_5_scale.sh
 ```
 
@@ -113,34 +120,79 @@ It takes about 10 minutes on our laptop.
 Once it is complete, results will be put in the directory `~/section_7_5_scale_results/kick_the_tires`.
 It should contain the following files:
 
-- `kick_the_tires.csv`: the aggregated data
-- `times.tsv`: a performance table (times in seconds)
-- `figure_10b`: Figure 10b from the paper (using the new data, of course)
+- `figure_10b` (bar graph)
+- `kick_the_tires.csv` (assembled data)
+- `times.tsv` (average time, in seconds)
 
 ## "Evaluation" Phase Instructions
 
-XXX
+The instructions here are similar to the instructions for the "kick the tires" phase; the main difference is that the scripts are set to do more trials (10) with longer timeouts (10 minutes).
+These are the settings used in the paper, but they will take a long time to complete, so you might want to adjust them (by modifying the variables in the relevant script).
 
 ### Evaluating Sections 7.1-7.4
 
-XXX
+Run this command:
+
+```bash
+~/scripts/evaluation_sections_7_1_to_7_4.sh
+```
+
+Modifying this script to run 3 trials with a timeout of 180 seconds, it takes XXX minutes to complete on our laptop.
+
+You should see the following files in the `~/results_sections_7_1_to_7_4/evaluation/` directory:
+
+- `figure_9.pdf` (boxplot)
+- `kick_the_tires.csv` (assembled data)
+- `table_2.tsv` (average time, in seconds)
+- `table_3.tsv` (number of conflicts)
 
 ### Evaluating Section 7.5 (Regular Benchmarks)
 
-XXX
+Run this command:
 
-The scripts invoked here do not recompile the benchmarks to record ProSynth compilation time; instead, they reuse compilation time results from the experiments reported in the paper (the data is in `~/section_7_5_regular_results/data/prosynth-z3/compilation_times/`).
+```bash
+~/scripts/evaluation_section_7_5_regular.sh
+```
+
+Modifying this script to run 3 trials with a timeout of 180 seconds, it takes XXX minutes to complete on our laptop.
+
+You should see the following files in the `~/results_section_7_5/evaluation/` directory:
+
+- `figure_10a.pdf` (boxplot)
+- `kick_the_tires.csv` (assembled data)
+- `program_sizes.pdf` (boxplot of synthesized solution size)
+- `times.tsv` (average time, in seconds)
+
+**NB #1:** Unless you are running with many cores, GenSynth might be slower than what is reported in the paper, as the paper reports it running 32 populations in parallel (this setting can be modified in the benchmarking script).
+
+**NB #2:** The scripts invoked here do not recompile the benchmarks to record ProSynth compilation time; instead, they reuse compilation time results from the experiments reported in the paper (the data is in `~/section_7_5_regular_results/data/prosynth-z3/compilation_times/`).
 To get a sense for the compilation times yourself (for, say, the `path` benchmark), you can run this command:
 
-```
+```bash
 export BENCH=path && rm -rf ~/benchmarks/build/regular/$BENCH && time cmake --build ~/benchmarks/build --target $BENCH 
 ```
 
-This command compiles the benchmark's Souffle code twice (once for ProSynth and once for MonoSynth), and so the ProSynth compilation time will be approximately half of the reported time.
+CMake compiles the benchmark's Souffle code twice (once for ProSynth and once for MonoSynth), and so the ProSynth compilation time will be approximately half of the reported time.
 
 ### Evaluating Section 7.5 (Scaling Evaluation)
 
-XXX
+Run this command:
+
+```bash
+~/scripts/evaluation_section_7_5_scale.sh
+```
+
+Modifying this script to run 3 trials with a timeout of 180 seconds, it takes XXX minutes to complete on our laptop.
+
+You should see the following files in the `~/results_section_7_5/evaluation/` directory:
+
+- `figure_10b` (bar graph)
+- `kick_the_tires.csv` (assembled data)
+- `times.tsv` (average time, in seconds)
+
+**NB #1:** Unless you are running with many cores, ASPSynth-Clingo-MinPremise, ILASP, and GenSynth might be slower than what is reported in the paper.
+The paper reports ASPSynth-Clingo-MinPremise using 32 threads to find a minimal solution, ILASP using 16 threads, and GenSynth running 32 populations in parallel.
+These settings can be modified in the benchmarking script.
 
 ## Updates
 
@@ -152,10 +204,9 @@ None so far.
     - [X] Add script for evaluating 7.5 scale
     - [X] Update data processing scripts for 7.5 scale experiments
     - [ ] Update data processing scripts for 7.5 regular experiments
-    - [ ] Update data processing scripts for 7.1-7.4 experiments
-- Clean up scripts directory
-- Remove unused directories
-- Instructions on how to view PDFs
-- Come up with better format for tables (maybe just output a TSV)
-- Test scripts
-- Clean up CVC4 source
+    - [X] Update data processing scripts for 7.1-7.4 experiments
+- [ ] Clean up scripts directory
+- [ ] Remove unused directories (`results/` and `popl-results/`)
+- [ ] Test scripts
+- [ ] Clean up CVC4 source
+- [ ] Make claims clear
