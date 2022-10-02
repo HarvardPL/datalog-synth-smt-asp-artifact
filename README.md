@@ -97,7 +97,7 @@ This command will run the regular (non-scaling) experiments in Section 7.5:
 ~/scripts/kick_the_tires_section_7_5_regular.sh
 ```
 
-It takes about 16 minutes on our laptop.
+It takes about 17 minutes on our laptop.
 
 Once it is complete, results will be put in the directory `~/section_7_5_regular_results/kick_the_tires/`.
 It should contain the following files:
@@ -146,6 +146,15 @@ You should see the following files in the `~/results_sections_7_1_to_7_4/evaluat
 - `table_2.tsv` (average time, in seconds)
 - `table_3.tsv` (number of conflicts)
 
+These are the main claims that this experiment should validate:
+
+- MonoSynth-Z3 on average outperforms ProSynth-Z3, although the gains are not universal.
+- LoopSynth-Z3 occasionally outperforms ProSynth-Z3 and MonoSynth-Z3.
+- MonoSynth-CVC4 consistently outperforms ProSynth-CVC4.
+- LoopSynth-CVC4 outperforms ProSynth-CVC4, and occasionally MonoSynth-CVC4.
+- ASPSynth-Clingo has by far the best performance: it is fast and consistent.
+- ASPSynth-WASP also performs consistently well, except for a single benchmark it times out on (`sql-15`).
+
 ### Evaluating Section 7.5 (Regular Benchmarks)
 
 Run this command:
@@ -162,6 +171,12 @@ You should see the following files in the `~/results_section_7_5/evaluation/` di
 - `kick_the_tires.csv` (assembled data)
 - `program_sizes.pdf` (boxplot of synthesized solution size)
 - `times.tsv` (average time, in seconds)
+
+These are the main claims that this experiment should validate:
+
+- The ASP-based approaches (especially ASPSynth-Clingo and ASPSynth-Clingo-MinPremise, and to a lesser extent ILASP) achieve significant speedups on average over ProSynth (even excluding ProSynth compilation time) and GenSynth.
+- GenSynth has the worst overall performance on this benchmark suite.
+- ASPSynth-Clingo-MinPremise performs about the same as ASPSynth-Clingo on this benchmark suite (i.e., minimization is not expensive here).
 
 **NB #1:** Unless you are running with many cores, GenSynth might be slower than what is reported in the paper, as the paper reports it running 32 populations in parallel (this setting can be modified in the benchmarking script).
 
