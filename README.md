@@ -139,7 +139,7 @@ Run this command:
 
 Modifying this script to run 3 trials with a timeout of 180 seconds, it takes XXX minutes to complete on our laptop.
 
-You should see the following files in the `~/results_sections_7_1_to_7_4/evaluation/` directory:
+You should see the following files in the `~/sections_7_1_to_7_4_results/evaluation/` directory:
 
 - `figure_9.pdf` (boxplot)
 - `kick_the_tires.csv` (assembled data)
@@ -165,7 +165,7 @@ Run this command:
 
 Modifying this script to run 3 trials with a timeout of 180 seconds, it takes XXX minutes to complete on our laptop.
 
-You should see the following files in the `~/results_section_7_5/evaluation/` directory:
+You should see the following files in the `~/section_7_5_regular_results/evaluation/` directory:
 
 - `figure_10a.pdf` (boxplot)
 - `kick_the_tires.csv` (assembled data)
@@ -199,11 +199,17 @@ Run this command:
 
 Modifying this script to run 3 trials with a timeout of 180 seconds, it takes XXX minutes to complete on our laptop.
 
-You should see the following files in the `~/results_section_7_5/evaluation/` directory:
+You should see the following files in the `~/section_7_5_scale_results/evaluation/` directory:
 
 - `figure_10b` (bar graph)
 - `kick_the_tires.csv` (assembled data)
 - `times.tsv` (average time, in seconds)
+
+These are the main claims that this experiment should validate:
+
+- The ASP-based approaches (ASPSynth-Clingo, ASPSynth-Clingo-MinPremise, ILASP) scale better than ProSynth.
+- ASPSynth-Clingo scales better than ASPSynth-Clingo-MinPremise, which scales better than ILASP.
+- Relative to GenSynth, the ASP-based approaches scale well if one dimension of the experiment is scaled up (i.e., the number of candidate rules or the size of the input-output example), but do not scale as well if both dimensions are scaled up simultaneously.
 
 **NB #1:** Unless you are running with many cores, ASPSynth-Clingo-MinPremise, ILASP, and GenSynth might be slower than what is reported in the paper.
 The paper reports ASPSynth-Clingo-MinPremise using 32 threads to find a minimal solution, ILASP using 16 threads, and GenSynth running 32 populations in parallel.
@@ -215,13 +221,16 @@ None so far.
 
 ## TODO
 
-- [ ] Write scripts for section 7.5 experiments
+- [X] Write scripts for running experiments
     - [X] Add script for evaluating 7.5 scale
     - [X] Update data processing scripts for 7.5 scale experiments
-    - [ ] Update data processing scripts for 7.5 regular experiments
+    - [X] Update data processing scripts for 7.5 regular experiments
     - [X] Update data processing scripts for 7.1-7.4 experiments
-- [ ] Clean up scripts directory
-- [ ] Remove unused directories (`results/` and `popl-results/`)
-- [ ] Test scripts
+- [X] Clean up scripts directory
+- [X] Remove unused directories (`results/` and `popl-results/`)
+- [X] Make claims clear
+- [ ] Test evaluation scripts
+    - [ ] evaluating 7.1-7.4
+    - [ ] evaluating 7.5 regular
+    - [ ] evaluating 7.5 scale
 - [ ] Clean up CVC4 source
-- [ ] Make claims clear
