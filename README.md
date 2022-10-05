@@ -1,6 +1,6 @@
 # From SMT to ASP: Solver-Based Approaches to Solving Datalog Synthesis-as-Rule-Selection Problems
 
-Welcome to the artifact for POPL'23 artifact #7!
+Welcome to POPL'23 artifact #7!
 
 This document is divided into the following sections:
 
@@ -29,19 +29,19 @@ If you are using Docker Desktop on OS X, you can set this via Preferences > Reso
 
 ## 2. Artifact Structure
 
-Once you are running a Docker container, you should see the following directories:
+Once you are running a Docker container, you should see the following directories in `/root/` (the home directory):
 
 - `benchmarks/`: the benchmarks, split between `regular` (the 40 ProSynth benchmarks) and `scale` (the scaling benchmarks).
 Each benchmark directory contains a `rules.small.dl` file with the candidate rules, plus `.fact` files for the example input, `.expected` files  for the expected output tuples,  and `.complement` files for the undesired output tuples.
 - `bin/`: links to the ProSynth-X, MonoSynth-X, LoopSynth-X, and AspSynth-X tools.
 - `build_data/`: miscellaneous data used to set up the image.
 - `datalog-smmt-cvc4-impl/`: our implementation of Datalog-as-a-monotonic-theory, hacked into CVC4 as a new theory.
-This directory contains all the source for CVC4, but most of our changes are in `~/datalog-smmt-cvc4-impl/CVC4-1.8/src/theory/datalog`. 
+This directory contains all the source for CVC4, but most of our changes are in `/root/datalog-smmt-cvc4-impl/CVC4-1.8/src/theory/datalog`. 
 - `datalog-smmt-z3-impl/`: our implementation of Datalog-as-a-monotonic-theory, built on top of Z3 using the custom propagator API.
 - `gensynth/`: a clone of the [GenSynth repository](https://github.com/jonomendelson/gensynth).
 - `scripts/`: source code for ProSynth-X, LoopSynth-X, and AspSynth-X tools, plus benchmarking scripts.
-- `section_7_5_regular_results/`: results for the regular (i.e., non-scaling) experiments in the Section 7.5 are put here.
-- `section_7_5_scale_results/`: results for the scaling experiments in the Section 7.5 are put here.
+- `section_7_5_regular_results/`: results for the regular (i.e., non-scaling) experiments in Section 7.5 are put here.
+- `section_7_5_scale_results/`: results for the scaling experiments in Section 7.5 are put here.
 - `sections_7_1_to_7_4_results/`: results for the experiments in Sections 7.1-7.4 are put here.
 
 ### Results Format
@@ -49,13 +49,13 @@ This directory contains all the source for CVC4, but most of our changes are in 
 Say you run the "kick the tires" experiment for the experiments in Sections 7.1-7.4 (the other experiments are similar).
 Results will be in the following format:
 
-- Raw data for tool `X` will be put in `~/sections_7_1_to_7_4_results/data/[X]/kick_the_tires/`.
-- The processed data will appear in `~/sections_7_1_to_7_4_results/kick_the_tires/`, including:
-    - `kick_the_tires.csv`, which contains all the results from all the tools.
+- Raw data for tool `X` will be put in `/root/sections_7_1_to_7_4_results/data/[X]/kick_the_tires/`.
+- The processed data will appear in `/root/sections_7_1_to_7_4_results/kick_the_tires/`, including:
+    - `kick_the_tires.csv`, which contains the assembled results from all the tools.
     - Some `.tsv` files that represent tables and can be opened in a spreadsheet viewer (e.g., Excel, Numbers, Google Sheets).
     - Some `.pdf` files containing plots.
-- Scripts for generating the tables and plots are in `~/sections_7_1_to_7_4_results/chart-scripts/`.
-- Scripts for running various tiny data analyses that are reported in the text (like the average time per Datalog call) can be found in `~/sections_7_1_to_7_4_results/stats-scripts/`.
+- Scripts for generating the tables and plots are in `/root/sections_7_1_to_7_4_results/chart-scripts/`.
+- Scripts for running various tiny data analyses that are reported in the text (like the average time per Datalog call) can be found in `/root/sections_7_1_to_7_4_results/stats-scripts/`.
 
 To view the `.pdf` files (and to open the `.csv` or `.tsv` files in a spreadsheet viewer), you will have to copy them from the Docker container to the host machine (e.g., your laptop) using the `docker cp` command.
 For example:
@@ -78,12 +78,12 @@ The results should generally look like the results reported in the paper, modulo
 This command will run the experiments in Sections 7.1-7.4:
 
 ```bash
-~/scripts/kick_the_tires_sections_7_1_to_7_4.sh
+/root/scripts/kick_the_tires_sections_7_1_to_7_4.sh
 ```
 
 It takes about 27 minutes on our laptop.
 
-Once it is complete, results will be put in the directory `~/sections_7_1_to_7_4_results/kick_the_tires/`.
+Once it is complete, results will be put in the directory `/root/sections_7_1_to_7_4_results/kick_the_tires/`.
 It should contain the following files:
 
 - `figure_9.pdf` (boxplot)
@@ -96,12 +96,12 @@ It should contain the following files:
 This command will run the regular (non-scaling) experiments in Section 7.5:
 
 ```bash
-~/scripts/kick_the_tires_section_7_5_regular.sh
+/root/scripts/kick_the_tires_section_7_5_regular.sh
 ```
 
 It takes about 17 minutes on our laptop.
 
-Once it is complete, results will be put in the directory `~/section_7_5_regular_results/kick_the_tires/`.
+Once it is complete, results will be put in the directory `/root/section_7_5_regular_results/kick_the_tires/`.
 It should contain the following files:
 
 - `figure_10a.pdf` (boxplot)
@@ -114,12 +114,12 @@ It should contain the following files:
 This command will run all the scaling experiments in Section 7.5:
 
 ```bash
-~/scripts/kick_the_tires_section_7_5_scale.sh
+/root/scripts/kick_the_tires_section_7_5_scale.sh
 ```
 
 It takes about 10 minutes on our laptop.
 
-Once it is complete, results will be put in the directory `~/section_7_5_scale_results/kick_the_tires`.
+Once it is complete, results will be put in the directory `/root/section_7_5_scale_results/kick_the_tires`.
 It should contain the following files:
 
 - `figure_10b` (bar graph)
@@ -136,12 +136,12 @@ These are the settings used in the paper, but they will take a **LONG** time to 
 Run this command:
 
 ```bash
-~/scripts/evaluation_sections_7_1_to_7_4.sh
+/root/scripts/evaluation_sections_7_1_to_7_4.sh
 ```
 
 **Modifying this script to run 3 trials with a timeout of 180 seconds**, it takes 196 minutes to complete on our laptop.
 
-You should see the following files in the `~/sections_7_1_to_7_4_results/evaluation/` directory:
+You should see the following files in the `/root/sections_7_1_to_7_4_results/evaluation/` directory:
 
 - `figure_9.pdf` (boxplot)
 - `evaluation.csv` (assembled data)
@@ -162,12 +162,12 @@ These are the main claims that this experiment should validate:
 Run this command:
 
 ```bash
-~/scripts/evaluation_section_7_5_regular.sh
+/root/scripts/evaluation_section_7_5_regular.sh
 ```
 
 **Modifying this script to run 3 trials with a timeout of 180 seconds**, it takes 106 minutes to complete on our laptop.
 
-You should see the following files in the `~/section_7_5_regular_results/evaluation/` directory:
+You should see the following files in the `/root/section_7_5_regular_results/evaluation/` directory:
 
 - `figure_10a.pdf` (boxplot)
 - `evaluation.csv` (assembled data)
@@ -183,11 +183,11 @@ These are the main claims that this experiment should validate:
 
 **NB #1:** Unless you are running with many cores, GenSynth might be slower than what is reported in the paper, as the paper reports it running 32 populations in parallel (this setting can be modified in the benchmarking script).
 
-**NB #2:** The scripts invoked here do not recompile the benchmarks to record ProSynth compilation time; instead, they reuse compilation time results from the experiments reported in the paper (the data is in `~/section_7_5_regular_results/data/prosynth-z3/compilation_times/`).
+**NB #2:** The scripts invoked here do not recompile the benchmarks to record ProSynth compilation time; instead, they reuse compilation time results from the experiments reported in the paper (the data is in `/root/section_7_5_regular_results/data/prosynth-z3/compilation_times/`).
 To get a sense for the compilation times yourself (for, say, the `path` benchmark), you can run this command:
 
 ```bash
-export BENCH=path && rm -rf ~/benchmarks/build/regular/$BENCH && time cmake --build ~/benchmarks/build --target $BENCH 
+export BENCH=path && rm -rf /root/benchmarks/build/regular/$BENCH && time cmake --build /root/benchmarks/build --target $BENCH 
 ```
 
 CMake compiles the benchmark's Souffle code twice (once for ProSynth and once for MonoSynth), and so the ProSynth compilation time will be approximately half of the reported time.
@@ -197,12 +197,12 @@ CMake compiles the benchmark's Souffle code twice (once for ProSynth and once fo
 Run this command:
 
 ```bash
-~/scripts/evaluation_section_7_5_scale.sh
+/root/scripts/evaluation_section_7_5_scale.sh
 ```
 
-**Modifying this script to run 3 trials with a timeout of 180 seconds**, it takes XXX minutes to complete on our laptop.
+**Modifying this script to run 3 trials with a timeout of 180 seconds**, it takes 161 minutes to complete on our laptop.
 
-You should see the following files in the `~/section_7_5_scale_results/evaluation/` directory:
+You should see the following files in the `/root/section_7_5_scale_results/evaluation/` directory:
 
 - `figure_10b` (bar graph)
 - `evaluation.csv` (assembled data)
@@ -221,26 +221,3 @@ These settings can be modified in the benchmarking script.
 ## 5. Updates
 
 None so far.
-
-## TODO
-
-- [X] Write scripts for running experiments
-    - [X] Add script for evaluating 7.5 scale
-    - [X] Update data processing scripts for 7.5 scale experiments
-    - [X] Update data processing scripts for 7.5 regular experiments
-    - [X] Update data processing scripts for 7.1-7.4 experiments
-- [X] Clean up scripts directory
-- [X] Remove unused directories (`results/` and `popl-results/`)
-- [X] Make claims clear
-- [ ] Test evaluation scripts
-    - [X] evaluating 7.1-7.4
-        - [X] make sure variables are exposed in script
-        - [X] reset ntrials and timeout
-    - [X] evaluating 7.5 regular
-        - [X] make sure variables are exposed in script
-        - [X] try compilation example
-        - [X] reset ntrials and timeout
-    - [ ] evaluating 7.5 scale
-        - [ ] make sure variables are exposed in script
-        - [ ] reset ntrials and timeout
-- [ ] Clean up CVC4 source
