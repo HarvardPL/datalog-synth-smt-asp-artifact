@@ -36,8 +36,10 @@ Each benchmark directory contains a `rules.small.dl` file with the candidate rul
 - `bin/`: links to the ProSynth-X, MonoSynth-X, LoopSynth-X, and AspSynth-X tools.
 - `build_data/`: miscellaneous data used to set up the image.
 - `datalog-smmt-cvc4-impl/`: our implementation of Datalog-as-a-monotonic-theory, hacked into CVC4 as a new theory.
-This directory contains all the source for CVC4, but most of our changes are in `/root/datalog-smmt-cvc4-impl/CVC4-1.8/src/theory/datalog`. 
+    - This directory contains all the source for CVC4, but most of our changes are in `./CVC4-1.8/src/theory/datalog`.
+    - The source code for MonoSynth-CVC4 is in `./CVC4-1.8/src/theory/datalog/monosynth/`.
 - `datalog-smmt-z3-impl/`: our implementation of Datalog-as-a-monotonic-theory, built on top of Z3 using the custom propagator API.
+The source code for MonoSynth-Z3 is in `./src/monosynth/`.
 - `gensynth/`: a clone of the [GenSynth repository](https://github.com/jonomendelson/gensynth).
 - `scripts/`: source code for ProSynth-X, LoopSynth-X, and AspSynth-X tools, plus benchmarking scripts.
 - `section_7_5_regular_results/`: results for the regular (i.e., non-scaling) experiments in Section 7.5 are put here.
