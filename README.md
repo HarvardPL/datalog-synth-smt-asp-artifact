@@ -8,18 +8,25 @@ This document is divided into the following sections:
 2. Artifact Structure
 3. "Kick the Tires" Phase Instructions
 4. "Evaluation" Phase Instructions
-5. Updates
+5. Changelog
 
 We'll push updates to the final section as necessary during the evaluation process to report any bug fixes or new instructions.
-Accordingly, if you are reading a local copy of this document, please also check the [GitHub repository](https://github.com/HarvardPL/datalog-synth-smt-asp-artifact) for any updates.
 
 ## 1. Setup 
 
-Our artifact can be found on a Docker image, publicly available on [Docker Hub](https://hub.docker.com/r/aaronbembenek/datalog-synth-smt-asp-artifact).
-Assuming that you have Docker installed, to download the image and run an interactive session you can simply use this command:
+Our artifact can be found on Zenodo; **please check for the newest version of it.**
+
+First, download the archive of the Docker image, named `datalog-synth-smt-asp-artifact.tar.gz`.
+Assuming that you have Docker installed, you can then load the image from the archive using this command:
 
 ```bash
-docker run --name datalog-synth-smt-asp-artifact -it aaronbembenek/datalog-synth-smt-asp-artifact:0.1.0 # may require sudo
+docker load < datalog-synth-smt-asp-artifact.tar.gz # may require sudo
+```
+
+To run an interactive session in a container named `datalog-synth-smt-asp-artifact`, run this command:
+
+```bash
+docker run --name datalog-synth-smt-asp-artifact -it datalog-synth-smt-asp-artifact:latest # may require sudo
 ```
 
 We ran the experiments reported in the paper directly (i.e., without Docker) on a powerful AWS EC2 (32 vCPUs and 128 GB RAM).
@@ -220,6 +227,6 @@ These are the main claims that this experiment should validate:
 The paper reports ASPSynth-Clingo-MinPremise using 32 threads to find a minimal solution, ILASP using 16 threads, and GenSynth running 32 populations in parallel.
 These settings can be modified in the benchmarking script.
 
-## 5. Updates
+## 5. Changelog 
 
-None so far.
+Nothing so far.
